@@ -1,18 +1,13 @@
 <template>
-    <div v-if="$store.state.authorized" class="desktop-menu">
-        <div class="center">
-            <a href="/" class="logotype"></a>
-            <button>Погасить займ</button>
-        </div>
-        <div class="menu">
-            <a href="#" class="loan active">Мой займ</a></li>
-            <a href="#" class="personal-data">Моя анкета</a></li>
-            <a href="#" class="my-accounts">Мои счета</a>
-            <a href="#" class="my-bonus">Бонусные рубли</a>
-            <a href="#" class="loan-history">История займов</a>
-            <a href="#" class="services">Услуги</a>
-            <hr/>
-            <a @click="logout" class="exit">Выход</a>
+    <div class="lk-header" xmlns="http://www.w3.org/1999/html">
+        <div class="container">
+            <div class="row logo-button">
+                <div class="columns four">
+                    <a href="/"><img src="/static/img/head/logo.png" alt="" class="a-image h-logo"></a>
+                </div>
+            </div>
+            <div class="row">
+            </div>
         </div>
     </div>
 </template>
@@ -32,6 +27,7 @@
 
 <style lang="sass">
     .lk-header
+        background: #333333
         width: 100%
         padding: 65px 0 50px 0
         box-sizing: border-box

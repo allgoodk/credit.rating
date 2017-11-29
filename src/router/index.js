@@ -4,12 +4,8 @@ import auth from '../auth'
 
 import { store } from '../store/store.js'
 
-import Home from '@/components/Home'
-import Accounts from '@/components/user/pages/Accounts'
-import Archive from '@/components/user/pages/Archive'
-import credit from '@/components/user/pages/Credit'
-import Profile from '@/components/user/pages/Profile'
 import Api from '@/components/Api'
+import Login from '@/components/registration/Login'
 
 Vue.use(Router)
 
@@ -18,37 +14,13 @@ const router = new Router({
   routes: [
     {
       path: '/',
-      name: 'Home',
-      component: Home
-    },
-    {
-      path: '/accounts',
-      name: 'Accounts',
-      component: Accounts
+      name: 'Login',
+      component: Login
     },
     {
       path: '/api',
       name: 'Api',
       component: Api
-    },
-    {
-      path: '/archive',
-      name: 'Archive',
-      component: Archive
-    },
-    {
-      path: '/credit',
-      name: 'credit',
-      component: credit,
-      meta: {
-        auth: true
-      }
-
-    },
-    {
-      path: '/profile',
-      name: 'Profile',
-      component: Profile
     }
   ],
   redirect: {

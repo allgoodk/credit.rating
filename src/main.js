@@ -14,8 +14,6 @@ import 'normalize.css'
 
 require('../static/css/custom.css')
 require('../static/css/skeleton.css')
-require('../static/css/custom-lk.css')
-require('../static/css/skeleton-lk.css')
 
 // import store
 import { store } from './store/store.js'
