@@ -1,0 +1,105 @@
+/* 
+
+ШАПКА
+
+АДАПТИВКА
+
+*/
+
+.lk-header {
+  background: #333333;
+  padding-bottom: 50px;
+  color: #fff;
+} 
+
+.header-personal {
+
+  display: flex;
+  justify-content: flex-end;
+  text-align: right;
+}
+
+.header-personal .avatar img {
+  width: 45px;
+  height: 45px;
+  border-radius: 100px;
+  display: inline-block;
+}
+
+.menu-hamburger .link-block-lk .exit {
+  font-weight: 500;
+  background: url('/static/img/head/desktop-menu/exit.png') no-repeat 0 4px;
+  padding: 0 0 0 20px;
+}
+
+.header-personal strong {
+  font-weight: 500;
+}
+
+.header-personal ul {
+  list-style: none;
+  display: inline-block;
+}
+
+.header-personal li {
+  margin-bottom: 0;
+}
+
+/* 
+
+ШАПКА
+
+*/
+
+
+
+/* 
+
+АДАПТИВКА
+
+*/
+
+@media (max-width: 1100px) {
+
+  .header-personal {
+    display: block;
+    justify-content: flex-end;
+    text-align: right;
+  }
+
+  .lk-header {
+    padding-bottom: 20px;
+  } 
+
+  .logo-button .four {
+    width: 80%;
+  }
+
+  .logo-button .header-personal {
+    display: none;
+  }
+
+  .logo-button .one {
+    width: 20%;
+  }
+
+  .header-personal .avatar img {
+    width: 76px;
+    height: 76px;
+  }
+
+  .header-personal ul {
+    display: block;
+    float: none;
+    text-align: center;
+  }
+
+}
+
+@media (max-width: 500px) {
+
+  .lk-header {
+    padding-bottom: 0px;
+  } 
+
+}

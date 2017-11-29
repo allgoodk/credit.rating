@@ -1,0 +1,1896 @@
+/*
+
+ОБЩЕЕ
+
+МЕНЮ
+
+ГЛАВНАЯ
+
+ВНУТРЯКИ
+
+  О КОМПАНИИ
+
+  ОТЗЫВЫ
+
+  КАК ПОЛУЧИТЬ ЗАЙМ
+
+  КАК ПОГАСИТЬ ЗАЙМ
+
+    МГНОВЕННАЯ ОПЛАТА
+
+  ЧАВО
+
+  НОВОСТИ
+
+  ЗАЙМЫ ПО ВСЕЙ СТРАНЕ (КАРТА)
+
+  ПАРТНЕРЫ
+
+  CЕРТИФИКАТЫ
+
+
+ПОДВАЛ
+
+КАЛЬКУЛЯТОР
+
+МОДАЛЬНЫЕ ОКНА
+
+АДАПТИВКА
+
+*/
+
+
+
+/*
+
+ОБЩЕЕ
+
+*/
+
+*, *::after, *::before {
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+}
+
+*::after, *::before {
+  content: '';
+}
+
+.a-image {
+  max-width: 100%;
+  height: auto;
+}
+
+.hidden {
+  display: none !important;
+}
+
+.left {
+  text-align: left;
+}
+
+.center {
+  text-align: center;
+}
+
+.right {
+  text-align: right;
+}
+
+.empty-15px-block {
+  height: 15px;
+}
+
+.empty-30px-block {
+  height: 30px;
+}
+
+.empty-50px-block {
+  height: 50px;
+}
+
+
+.main-p-header, .header {
+  z-index: 10;
+  width: 100%;
+  padding: 65px 0 0 0;
+}
+
+.main-p-header .logo-button .seven {
+  padding-top: 10px;
+}
+
+h1.header-h, h2.header-h, h3.header-h, h4.header-h, h5.header-h, h6.header-h, .header-h {
+  display: block;
+  font-size: 66px;
+  color: #fff;
+  border-left: 6px #ffdf42 solid;
+  line-height: 130%;
+  margin-top: 200px;
+  text-transform: uppercase;
+  padding: 0 0 0 55px;
+  font-weight: 300;
+  font-family: 'museo';
+  line-height: 1.2;
+  letter-spacing: -.1rem;
+}
+
+.lk-button {
+  background-color: transparent;
+  border: 2px solid #fff;
+  color: #fff;
+  font-weight: 500;
+}
+
+.lk-button:hover {
+  background: #fff;
+  padding: 0 30px;
+  color: #000;
+}
+
+.photo-contest-banner p {
+  display: inline-block;
+  margin: 0 10px 10px 10px;
+  text-align: left;
+}
+
+.photo-contest-banner span.white {
+  background: #fff;
+  display: inline-block;
+  padding: 10px 20px;
+  color: #000;
+}
+
+.photo-contest-banner button {margin-bottom: 10px;}
+.black-friday-banner p {
+  display: inline-block;
+  margin: 0 10px;
+  text-align: left;
+}
+
+.black-friday-banner span.white {
+  background: #fff;
+  display: inline-block;
+  padding: 10px 20px;
+  color: #000;
+  margin-bottom: 10px;
+}
+
+.black-friday-banner2 a {
+  color: #fff;
+}
+
+.black-friday-banner2 p {
+  display: inline-block;
+  margin: 0 10px;
+  text-align: left;
+}
+
+.black-friday-banner2 span.white {
+  background: #fff;
+  display: inline-block;
+  padding: 10px 20px;
+  color: #000;
+  margin-bottom: 10px;
+}
+
+.black-friday-banner2 a {
+  color: #fff;
+}
+ .halloween-banner p {
+  display: inline-block;
+  margin: 0 10px;
+  text-align: left;
+}
+
+.halloween-banner span.white {
+  background: #fff;
+  display: inline-block;
+  padding: 10px 20px;
+  color: #000;
+  margin-bottom: 10px;
+}
+
+.halloween-banner a {
+  color: #fff;
+}
+
+/*
+
+МЕНЮ
+
+*/
+
+@keyframes menu-animation {
+  from {
+    background: rgba(51, 51, 51, 0.5);
+    top: -100px;
+  }
+  to {
+    background: rgba(51, 51, 51, 1);
+    top: 0px;
+  }
+}
+
+.get-money-button {
+  margin-left: 10px;
+}
+
+.menu-hamburger {
+  display: none;
+  position: absolute;
+  right: 0%;
+  top: 0px;
+  width: 100%;
+  animation-name: menu-animation;
+  animation-duration: 0.3s;
+  z-index: 10;
+  color: #fff;
+  padding-bottom: 10px;
+}
+
+.menu-hamburger .h-logo {
+  margin-bottom: 20px;
+}
+
+.menu-hamburger .logo-button {
+  padding: 65px 0 0 0;
+}
+.opened {
+  display: inline-block;
+  background: rgba(51, 51, 51, 1);
+}
+
+.menu-hamburger hr {
+  border: 0;
+  height: 1px;
+  background-color: #616161;
+  width: 100%;
+  margin: 0;
+  margin-bottom: 30px;
+}
+
+.menu-hamburger .lk-adaptive {
+  display: none;
+}
+
+.menu-hamburger button.lk {
+  display: none;
+}
+
+.menu-hamburger ul.link-block {
+  list-style: none;
+  text-align: center;
+  margin: 0;
+}
+
+.menu-hamburger .link-block li {
+  font-size: 18px;
+  font-weight: 300;
+  margin-bottom: 30px;
+  display: inline-block;
+  margin: 0 20px 20px 20px;
+}
+
+.menu-hamburger a {
+  color: #fff;
+  text-decoration: none;
+}
+
+.menu-hamburger a.active {
+  font-weight: 500;
+  color: #ffdf42;
+}
+
+.menu-hamburger .active span {
+  border-bottom: 2px solid #ffdf42;
+}
+
+@media (max-width: 1100px) {
+
+  .hamburger {
+    margin-top: -8px;
+  }
+
+  .menu-hamburger .lk-adaptive {
+    display: block;
+  }
+
+  .menu-hamburger .lk-adaptive button {
+    display: inline-block;
+    margin-bottom: 30px;
+  }
+
+  .menu-hamburger li {
+    margin: 0 30px 30px 30px;
+  }
+}
+
+@media (max-width: 600px) {
+
+  .menu-hamburger .logo-button {
+    padding: 35px 0 0 0;
+  }
+
+  .menu-hamburger .link-block li {
+    display: block;
+    padding: 0;
+    margin: 0 0 20px 0;
+  }
+
+  .menu-hamburger .link-block a {
+    width: 100% ;
+    display: block !important;
+    padding: 10px 0;
+  }
+
+}
+
+
+
+/*
+
+ГЛАВНАЯ
+
+*/
+
+.click-alpha-off {pointer-events: none;}
+
+.click-alpha-on {pointer-events: auto !important;}
+
+.main-p-header {position: absolute;}
+
+.main-p-calculator {
+  width: 100%;
+  position: absolute;
+  margin-top: 160px;
+  z-index: 2;
+}
+
+.main-p-calculator .calculator {
+  width: 355px;
+  float: right;
+  border-radius: 0 !important;
+}
+
+.main-p-memo {
+  font-size: 15px;
+  color: #8a8a8a;
+  line-height: 150%;
+  text-align: center;
+  margin-bottom: 90px;
+}
+
+.m-p-promo {
+  display: none;
+}
+
+.m-p-slide {
+  height: 850px;
+  background-size: cover !important;
+}
+
+.m-p-slide .slide-content {
+  width: 80%;
+  display: block;
+  position: relative;
+  top: 420px;
+  font-family: 'museo';
+  font-size: 40px;
+  font-weight: bold;
+  color: #fff;
+  line-height: 1.5;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+}
+
+.m-p-slide .slide-content span{
+    font-size: 18px;
+    padding-left:15px;
+
+}
+
+.slide-content p {
+    border-left: 6px solid #ffdf42;
+    padding-left:15px;
+}
+
+.m-p-slide .black {
+  color: #000;
+}
+
+.m-p-slide button.white-b {
+  background-color: #fff;
+  color: #000;
+}
+
+.m-p-slide button.black-b {
+  background-color: #000;
+  color: #fff;
+}
+
+.m-p-slide button.white-alpha-b {
+  background-color: rgba(0, 0, 0, 0);
+  border: 2px solid #fff;
+  color: #fff;
+}
+
+.header-fixed {
+  width:100%;
+  position: fixed;
+  top: 0;
+  background: #363636;
+  padding: 23px 0 5px 0;
+}
+
+.owl1 .owl-dots {
+  margin-bottom: -27px;
+}
+
+.gray-full-block {
+  background: #f7f7f7;
+  padding: 150px 0 130px 0;
+}
+
+.white-full-block {
+  background: #fff;
+  padding: 150px 0 130px 0;
+}
+
+.three-steps {
+  text-align: center;
+}
+
+.three-steps h1, .three-steps h2, .three-steps h3, .three-steps h4, .three-steps h5, .three-steps h6, .three-steps .header-block {
+  display: block;
+  margin-top: 0;
+  font-family: 'museo';
+  line-height: 1.2;
+  letter-spacing: -.1rem;
+  color: #222;
+  font-size: 22px;
+  font-weight: 500;
+  margin-bottom: 10px;
+}
+
+.three-steps p {
+  color: #8a8a8a;
+  font-size: 13px;
+}
+
+.three-steps img {
+  margin-bottom: 20px;
+}
+
+.m-p-awards .owl-nav [class*='owl-'] {
+  top: 35% !important;
+}
+
+.mobile-app-block .goo {
+  margin-right: 20px;
+}
+
+.ie .mobile-app-block .five {padding-top: 250px;}
+
+.owl-offers {
+  background: #f7f7f7;
+}
+
+.owl-offers .slide {
+  background: 50% 0 no-repeat #f7f7f7;
+  padding: 100px;
+}
+
+.owl-offers .owl-dots {
+  position: absolute !important;
+  left: 50%;
+  top: 85% !important;
+}
+
+.owl-offers .owl-dot span {
+  border: 2px solid #000 !important;
+}
+
+.owl-offers .owl-dot.active span {
+  background: rgba(0,0,0,1) !important;
+}
+
+.main-p-subscribe {
+  padding: 50px 0;
+}
+
+.main-p-subscribe label {
+  font-size: 15px;
+  min-height: 65px;
+  line-height: 65px;
+  text-align: right;
+}
+
+
+/*
+
+ВНУТРЯКИ
+
+*/
+
+.inner-botom-button {margin-bottom: 70px;}
+
+.inner-margin-block {height: 40px;}
+
+.inner-banner a {
+  display: inline-block;
+  background: #fff;
+  text-align: center;
+  border: 1px solid #000;
+  width: 100%;
+}
+
+
+
+/*
+
+О КОМПАНИИ
+
+*/
+ .about-page {
+  background: #f7f7f7;
+  padding: 100px 0 0 0;
+}
+
+.about-page .about-block {
+  background: #fff;
+  padding: 40px;
+  border-radius: 10px;
+  margin-bottom: 70px;
+}
+
+.about-page .about-block h1, .about-page .about-block h2, .about-page .about-block h3, .about-page .about-block h4, .about-page .about-block h5, .about-page .about-block h6, .about-page .about-block .header-block  {
+  display: block;
+  margin-top: 0;
+  font-family: 'museo';
+  line-height: 1.2;
+  letter-spacing: -.1rem;
+  color: #222;
+  font-weight: 500;
+  font-size: 30px;
+  margin-bottom: 70px;
+}
+
+.about-page .about-block p {
+  font-size: 18px;
+  margin-bottom: 40px;
+}
+
+.about-page .about-block .owl2 {
+  margin: 0 0 50px 0;
+}
+
+.about-page .owl-nav [class*='owl-'] {
+  top: 35% !important;
+}
+
+
+.about-page .owl2 .overlay:hover {
+  opacity: 1;
+}
+
+
+
+/*
+
+ОТЗЫВЫ
+
+*/
+
+.main-p-reviews {}
+
+.main-p-reviews .review {}
+
+.main-p-reviews .review h1, .main-p-reviews .review h2, .main-p-reviews .review h3, .main-p-reviews .review h4, .main-p-reviews .review h5, .main-p-reviews .review h6, .main-p-reviews .review .header-block {
+  display: block;
+  margin-top: 0;
+  font-family: 'museo';
+  margin-bottom: 30px;
+  line-height: 1.2;
+  letter-spacing: -.1rem;
+  color: #222;
+  font-size: 26px;
+  font-weight: 500;
+}
+
+.main-p-reviews .review .avatar {
+  display: inline-block;
+  float: left;
+  margin: 0 30px 50px 0;
+  border-radius: 100px;
+}
+
+.main-p-reviews .review .social {
+  top: 3px;
+  position: relative;
+  display: inline-block;
+}
+
+.main-p-reviews .reviews-block {
+  margin-bottom: 35px;
+}
+
+.reviews-page {
+  background: #f7f7f7;
+  padding: 100px 0 0 0;
+}
+
+.reviews-page .social-auth {
+  margin-bottom: 70px;
+}
+
+.reviews-page .social-auth p {
+  font-size: 18px;
+  color: #000;
+}
+
+.reviews-page .add-review {
+  background: #fff;
+  padding: 40px;
+  margin-bottom: 70px;
+  border-radius: 10px;
+}
+
+.reviews-page input,.reviews-page textarea {
+  margin-bottom: 30px;
+}
+
+.reviews-page label {
+  font-weight: 500;
+  margin-bottom: 15px;
+}
+
+.reviews-page .ulogin-buttons-container div {
+  -webkit-filter: grayscale(100%) opacity(50%);
+  filter: grayscale(100%) opacity(50%);
+  border-radius: 100px !important;
+}
+
+.reviews-page .ulogin-buttons-container div:hover {
+  -webkit-filter: grayscale(0%) opacity(100%) ;
+  filter: grayscale(0%) opacity(100%);
+}
+
+.reviews-page .review {
+  background: #fff;
+  margin-bottom: 50px;
+  border-radius: 10px;
+  padding: 40px;
+}
+
+.reviews-page .review .who-block {
+  margin-bottom: 40px;
+}
+
+.reviews-page .review .avatar {
+  border-radius: 100px;
+  width: 100px;
+  height: 100px;
+}
+
+.reviews-page .review .name {
+  padding: 10px 0 0 0;
+  font-size: 30px;
+  font-weight: 400;
+  line-height: 30px;
+  margin-bottom: 8px;
+}
+
+.reviews-page .review .city {
+  color: #cdcbcb;
+  font-size: 16px;
+  line-height: 16px;
+  margin-bottom: 10px;
+}
+
+
+.reviews-page .review .stars-0 {background-position: 0 0;}
+.reviews-page .review .stars-1 {background-position: 0 -25px;}
+.reviews-page .review .stars-2 {background-position: 0 -50px;}
+.reviews-page .review .stars-3 {background-position: 0 -75px;}
+.reviews-page .review .stars-4 {background-position: 0 -100px;}
+.reviews-page .review .stars-5 {background-position: 0 -125px;}
+
+.reviews-page .review h1, .reviews-page .review h2, .reviews-page .review h3, .reviews-page .review h4, .reviews-page .review h5, .reviews-page .review h6, .reviews-page .review .header-block {
+  display: block;
+  margin-top: 0;
+  font-family: 'museo';
+  margin-bottom: 2rem;
+  line-height: 1.2;
+  letter-spacing: -.1rem;
+  color: #222;
+  font-size: 26px;
+  font-weight: 500;
+}
+
+.reviews-page .review p {
+  font-size: 18px;
+  color: #545454;
+}
+
+.reviews-page .review a.show-more {
+  line-height: 50px;
+  font-size: 18px;
+  color: #e0e0e0;
+}
+
+.reviews-page .review a.show-more:hover {
+  color: #a2a2a2;
+}
+
+.reviews-page .carma {
+  background: #fff;
+  font-size: 36px;
+  color: #e0e0e0;
+}
+
+.reviews-page .carma .thumb-block {
+  display: inline-block;
+  margin: 0 30px 0 0;
+}
+
+
+
+.reviews-page .carma .plus {background-position: 0 0;}
+.reviews-page .carma .minus {background-position: 0 100%;}
+.reviews-page .carma .plus:hover {background-position: 100% 0;}
+.reviews-page .carma .minus:hover {background-position: 100% 100%;}
+
+
+
+/*
+
+КАК ПОЛУЧИТЬ ЗАЙМ
+
+*/
+
+
+.get-loan-page {
+  background: #f7f7f7;
+  padding: 100px 0 0 0;
+}
+
+.get-loan-page .get-loan-block {
+  background: #fff;
+  border-radius: 10px;
+  padding: 60px 60px 10px 60px;
+  margin-bottom: 70px;
+}
+
+.get-loan-page .get-loan-block h1, .get-loan-page .get-loan-block h2, .get-loan-page .get-loan-block h3, .get-loan-page .get-loan-block h4, .get-loan-page .get-loan-block h5, .get-loan-page .get-loan-block h6, .get-loan-page .get-loan-block .header-block  {
+  display: block;
+  margin-top: 0;
+  font-family: 'museo';
+  line-height: 1.2;
+  letter-spacing: -.1rem;
+  color: #222;
+  margin-bottom: 50px;
+  font-size: 26px;
+  font-weight: 500;
+}
+
+.get-loan-page .get-loan-block p {
+  font-size: 18px;
+  color: #545454;
+  margin-bottom: 50px;
+}
+
+.get-loan-page .question-block {
+  background: #f7f7f7;
+  border-radius: 10px;
+  margin-bottom: 40px;
+}
+
+.get-loan-page .question {
+  position: relative;
+  padding: 40px;
+  cursor: pointer;
+  font-size: 20px;
+  font-family: 'museo';
+  font-weight: 500;
+  display: flex;
+  align-items: center;
+  overflow: hidden;
+}
+
+.get-loan-page .question .faq-arrow {
+  margin: -17px 0 0 -10px;
+  float: right;
+  position: absolute;
+  top: 55%;
+  left: 97%;
+}
+
+.get-loan-page .question .arrow-rotate {
+  -moz-transform: rotate(90deg);
+  -webkit-transform: rotate(90deg);
+  transform: rotate(90deg);
+}
+
+.get-loan-page .answer {
+  margin-top: -10px;
+  padding: 0 40px 5px 40px;
+  display: none;
+  color: #8a8a8a;
+}
+
+.get-loan-page .answer p {
+  font-size: 16px;
+  margin-bottom: 40px;
+}
+
+.get-loan-page .answer p.small {
+  font-size: 12px;
+}
+
+
+.get-loan-page .answer hr {
+  height: 1px;
+  border: none;
+  background: #dedede;
+  margin: 0 0 30px 0;
+}
+
+
+
+/*
+
+КАК ПОГАСИТЬ ЗАЙМ
+
+*/
+
+.pay-loan-page {
+  background: #f7f7f7;
+  padding: 100px 0 0 0;
+}
+
+.pay-loan-page .pay-loan-block {
+  background: #fff;
+  border-radius: 10px;
+  padding: 60px 60px 10px 60px;
+  margin-bottom: 70px;
+}
+
+.pay-loan-page .pay-loan-block h1, .pay-loan-page .pay-loan-block h2, .pay-loan-page .pay-loan-block h3, .pay-loan-page .pay-loan-block h4, .pay-loan-page .pay-loan-block h5, .pay-loan-page .pay-loan-block h6, .pay-loan-page .pay-loan-block .header-block {
+  display: block;
+  margin-top: 0;
+  font-family: 'museo';
+  line-height: 1.2;
+  letter-spacing: -.1rem;
+  color: #222;
+  margin-bottom: 50px;
+  font-size: 26px;
+  font-weight: 500;
+}
+
+.pay-loan-page .pay-loan-block .small {
+  font-size: 22px !important;
+}
+
+.pay-loan-page .pay-loan-block p {
+  font-size: 18px;
+  color: #545454;
+  margin-bottom: 70px;
+}
+
+.pay-loan-page .pay-option {
+  position: relative;
+  text-align: center;
+  background: #f7f7f7;
+  border-radius: 10px;
+  padding: 20px 10px;
+  margin-bottom: 30px;
+  box-sizing: border-box;
+  cursor: pointer;
+}
+
+.pay-loan-page .pay-option img {
+  margin-bottom: 10px;
+}
+
+.pay-loan-page .pay-option span{
+  display: block;
+  color: #7c8496;
+  text-transform: uppercase;
+  font-weight: 500;
+  font-size: 11px;
+}
+
+.pay-loan-page .active {
+  border: 1px solid #c9cee4;
+}
+
+
+
+.pay-loan-page .question-block {
+  background: #f7f7f7;
+  border-radius: 10px;
+  margin-bottom: 40px;
+}
+
+.pay-loan-page .question {
+  position: relative;
+  padding: 40px;
+  cursor: pointer;
+  font-size: 20px;
+  font-family: 'museo';
+  font-weight: 500;
+
+  overflow: hidden;
+}
+
+.pay-loan-page .question .faq-arrow {
+  margin: -17px 0 0 -10px;
+  float: right;
+  position: absolute;
+  top: 55%;
+  left: 97%;
+}
+
+.pay-loan-page .question .arrow-rotate {
+  -moz-transform: rotate(90deg);
+  -webkit-transform: rotate(90deg);
+  transform: rotate(90deg);
+}
+
+.pay-loan-page .answer {
+  margin-top: -10px;
+  padding: 0 40px 5px 40px;
+  display: none;
+  color: #8a8a8a;
+}
+
+.pay-loan-page .answer p {
+  font-size: 16px;
+  margin-bottom: 40px;
+}
+
+.pay-loan-page .answer p.small {
+  font-size: 12px;
+}
+
+
+.pay-loan-page .answer hr {
+  height: 1px;
+  border: none;
+  background: #dedede;
+  margin: 0 0 30px 0;
+}
+
+/*
+
+МГНОВЕННАЯ ОПЛАТА
+
+*/
+
+.pay-loan-page .instant-pay {
+  background: #fff;
+  border-radius: 10px;
+  padding: 60px 60px 10px 60px;
+  margin-bottom: 70px;
+  font-size: 18px;
+}
+
+.pay-loan-page .instant-pay p {
+  font-size: 18px;
+}
+
+.pay-loan-page .instant-pay h1, .pay-loan-page .instant-pay h2, .pay-loan-page .instant-pay h3, .pay-loan-page .instant-pay h4, .pay-loan-page .instant-pay h5, .pay-loan-page .instant-pay h6, .pay-loan-page .instant-pay .header-block {
+  display: block;
+  margin-top: 0;
+  font-family: 'museo';
+  line-height: 1.2;
+  letter-spacing: -.1rem;
+  color: #222;
+  margin-bottom: 30px;
+  font-size: 30px;
+  font-weight: 500;
+}
+
+.instant-pay .form-block .column, .instant-pay .form-block .column {
+  position: relative;
+}
+
+.pay-loan-page .instant-pay input {
+  height: 50px;
+  padding: 10px;
+  border: none;
+  border-radius: 0;
+  border-bottom: 1px solid #cbdae0;
+  margin-bottom: 30px;
+}
+
+.pay-loan-page .instant-pay input:focus {
+  border: none;
+  border-bottom: 1px solid #ffdf42;
+}
+
+.pay-loan-page .instant-pay label {
+  padding: 0 0 0 10px;
+  transition: 0.1s ease-out;
+  font-size: 15px;
+  color: #6d737b;
+  font-weight: 300;
+  position: absolute;
+  top: 15px;
+}
+
+.pay-loan-page .instant-pay input:focus ~ label, .pay-loan-page .instant-pay input.filled ~ label {
+  color: #929aa6;
+  top: -8px;
+  font-size: 12px;
+}
+
+.pay-loan-page .instant-pay .error input, .pay-loan-page .instant-pay .error input.filled ~ label {
+  color: #fb5644;
+  border-color: #fb5644;
+}
+
+.pay-loan-page .instant-pay .error strong {
+  color: #fb5644;
+}
+
+.instant-pay .form-data .label {
+  text-align: right;
+  min-height: 50px;
+  line-height: 50px;
+}
+
+.instant-pay .form-data .data {
+  min-height: 50px;
+  border-bottom: 1px solid #cbdae0;
+  padding: 0 10px;
+  margin-bottom: 30px;
+  line-height: 50px;
+}
+
+.pay-loan-page .instant-pay .back-link {
+  line-height: 50px;
+}
+
+.pay-loan-page .instant-pay .big-rubles {
+  font-size: 28px;
+}
+
+.pay-loan-page .instant-pay strong.success {
+  color: #36c67a;
+}
+
+.pay-loan-page .instant-pay strong.not-success {
+  color: #e84c3d;
+}
+
+
+
+/*
+
+ЧАВО
+
+*/
+
+
+.faq-page {
+  background: #f7f7f7;
+  padding: 100px 0 0 0;
+}
+
+.faq-page .question-block {
+  background: #fff;
+  margin-bottom: 70px;
+  border-radius: 10px;
+}
+
+.faq-page .question {
+  padding: 40px;
+  cursor: pointer;
+  font-size: 20px;
+  font-family: 'museo';
+  font-weight: 500;
+  display: flex;
+  align-items: center;
+  overflow: hidden;
+}
+
+.faq-page .question .faq-arrow {
+  margin: 0 -10px 0 10px;
+}
+
+.faq-page .question .arrow-rotate {
+  -moz-transform: rotate(90deg);
+  -webkit-transform: rotate(90deg);
+  transform: rotate(90deg);
+}
+
+.faq-page .answer {
+  margin-top: -10px;
+  padding: 0 40px 40px 40px;
+  display: none;
+  color: #8a8a8a;
+}
+
+.faq-page .answer hr {
+  height: 1px;
+  border: none;
+  background: #ededed;
+  margin: 0 0 30px 0;
+}
+
+
+
+/*
+
+НОВОСТИ
+
+*/
+
+
+.main-p-news {}
+
+.news-page, .news-page-inner {
+  background: #f7f7f7;
+  padding: 100px 0 0 0;
+}
+
+.main-p-news .news-block, .news-page .news-block{
+  margin-bottom: 35px;
+}
+
+.main-p-news .news, .news-page .news {
+  background: #fff;
+  margin-bottom: 30px;
+  border-radius: 10px;
+}
+
+.news-page .news-block .odd {
+  margin-left: 0;
+  clear: both !important;
+}
+
+.main-p-news .news .back, .news-page .news .back {
+  height: 250px;
+  background: 50% 50%;
+  margin: 0 0 30px 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  overflow: hidden;
+  border-top-right-radius: 10px;
+  border-top-left-radius: 10px;
+}
+
+.ie .news .back, .ie .news .back {
+  display: block;
+  overflow: hidden !important;
+  text-align: center;
+}
+
+.ie .news .back img, .ie .news .back img{
+  display: inline-block;
+  margin: 0 0 0 -300px;
+}
+
+
+.news-page-inner .news-block .marker {
+  background-position: 0 3px;
+  padding: 0 0 0 25px;
+  margin: 0 0 25px 0;
+}
+
+
+.main-p-news .news h1, .main-p-news .news h2, .main-p-news .news h3, .main-p-news .news h4, .main-p-news .news h5, .main-p-news .news h6, .main-p-news .news .header-block, .news-page .news h1, .news-page .news h2, .news-page .news h3, .news-page .news h4, .news-page .news h5, .news-page .news h6, .news-page .news .header-block
+{
+  display: block;
+  margin-top: 0;
+  font-family: 'museo';
+  line-height: 1.2;
+  letter-spacing: -.1rem;
+  color: #222;
+  font-weight: 300;
+  font-size: 20px;
+  padding: 0 25px;
+  margin-bottom: 30px;
+}
+
+.main-p-news .news a, .news-page .news a {
+  text-decoration: none;
+  color: #222;
+}
+
+.news-page-inner .news-block {
+  margin-bottom: 70px;
+  background: #fff;
+  padding: 40px;
+  border-radius: 10px;
+}
+
+.news-page-inner .news-block .img-block {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  overflow: hidden;
+}
+
+
+
+/*
+
+ЗАЙМЫ ПО ВСЕЙ СТРАНЕ (КАРТА)
+
+*/
+
+.map-page {
+  background: #f7f7f7;
+  padding: 100px 0 0 0;
+}
+
+.map-page .map-block {
+  margin-bottom: 70px;
+  background: #fff;
+  padding: 40px;
+  border-radius: 10px;
+}
+
+.map-page .map-block .initial-letter {
+  display: block;
+  font-size: 30px;
+  font-family: 'museo';
+  font-weight: 500;
+}
+
+.map-page .map-block a {
+  display: block;
+}
+
+.map-page .map-block .alphabet .first-of-four {
+  clear: both;
+  margin-left: 0;
+}
+
+.map-page .map-block .alphabet {
+  margin-bottom: 20px;
+}
+
+
+.map-page .map-block .href-block {
+  margin-bottom: 30px;
+}
+
+
+/*
+
+ПАРТНЕРЫ
+
+*/
+
+.partners-page {
+  background: #f7f7f7;
+  padding: 100px 0 0 0;
+}
+
+.partners-page .partners-block, .partners-page .partner-block {
+  margin-bottom: 70px;
+  background: #fff;
+  border-radius: 10px;
+}
+
+.partners-page .partners-block {
+  padding: 20px 40px 40px 40px;
+}
+
+.partners-page .partners-block a {
+  display: inline-block;
+  padding: 30px 15px;
+}
+
+.partners-page .partners-block button {
+  margin: 30px 0 10px 0;
+}
+
+.partners-page .partner-block {
+  position: relative;
+  padding: 50px 40px;
+}
+
+.partners-page .partner-block h1, .partners-page .partner-block h2, .partners-page .partner-block h3, .partners-page .partner-block h4, .partners-page .partner-block h5, .partners-page .partner-block h6, .partners-page .partner-block .header-block {
+  margin-bottom: 40px;
+}
+
+.partners-page .partner-block .partner-image {
+  position: absolute;
+  top: 30px;
+  right: 40px;
+}
+
+
+
+/*
+
+CЕРТИФИКАТЫ
+
+*/
+
+.certifacates-page {
+  background: #f7f7f7;
+  padding: 100px 0 0 0;
+}
+
+.certifacates-page .certifacates-block {
+  background: #fff;
+  padding: 60px 40px 20px 40px;
+  border-radius: 10px;
+  margin-bottom: 70px;
+}
+
+.certifacates-page .certifacates-block h1, .certifacates-page .certifacates-block h2, .certifacates-page .certifacates-block h3, .certifacates-page .certifacates-block h4, .certifacates-page .certifacates-block h5, .certifacates-page .certifacates-block h6, .certifacates-page .certifacates-block .header-block  {
+  display: block;
+  margin-top: 0;
+  font-family: 'museo';
+  line-height: 1.2;
+  letter-spacing: -.1rem;
+  color: #222;
+  font-weight: 500;
+  font-size: 30px;
+  margin-bottom: 70px;
+}
+
+.certifacates-page .certifacates-block p {
+  font-size: 16px;
+  margin-bottom: 40px;
+  text-align: center;
+  font-style: italic;
+}
+
+.certifacates-page .overlay-block {
+  position: relative;
+  margin-bottom: 0px;
+}
+
+.certifacates-page .overlay-block img {
+  display: block;
+  position: relative;
+  margin: 0 auto;
+}
+
+
+.certifacates-page .overlay-block .overlay:hover {
+  opacity: 1;
+}
+
+/*
+
+ПОДВАЛ
+
+*/
+
+.footer {
+  color: #8f8f8f;
+  background: #333333;
+  padding: 75px 0 50px 0;
+}
+
+.footer .social {
+  margin: 0 0 50px 0;
+}
+
+.footer .no-margin {
+    margin: 0;
+}
+
+.footer .logo-img {
+  display: block;
+  margin-bottom: 6px;
+}
+
+.footer h1, .footer h2, .footer h3, .footer h4,  .footer h5,  .footer h6,  .footer .header-block {
+  display: block;
+  margin-top: 0;
+  font-family: 'museo';
+  line-height: 1.2;
+  letter-spacing: -.1rem;
+  text-transform: uppercase;
+  font-size: 16px;
+  color: #fff;
+  margin-bottom: 30px;
+  font-weight: 300;
+}
+
+.footer .ten-margin {
+    margin-bottom: 10px;
+}
+
+.footer .twenty-margin {
+    margin-bottom: 20px;
+}
+
+.footer .mobile-app {
+  margin-bottom: 40px;
+}
+
+.footer .mobile-app .goo {
+  margin-right: 20px;
+}
+
+.footer ul {
+  list-style: none;
+  margin: 0 0 50px 0;
+}
+
+.footer li {
+  margin: 0 0 12px 0;
+}
+
+.footer .sc-icons {
+    margin: 0 !important;
+}
+
+.footer ul.sc-icons {
+  display: block;
+  width: 100%;
+}
+
+.footer .sc-icons li {
+  margin-right: 17px;
+  margin-bottom: 15px;
+  float: left;
+}
+
+.footer a {
+  text-decoration: none;
+  color: #8f8f8f;
+}
+
+.footer hr {
+  margin: 5px 0;
+  border-width: 0;
+  border-top: 1px solid #8f8f8f;
+}
+
+.footer hr + p {
+    font-size: 0.8em;
+    margin-bottom: 1rem;
+}
+
+.footer .owl {
+  margin-bottom: 30px;
+}
+
+.footer .sro-mir {
+  line-height: 100%;
+  margin-bottom: 50px;
+}
+
+.footer .sro-mir img {
+  float: left;
+  margin-right: 15px;
+  margin-bottom: 30px;
+}
+
+/*
+
+КАЛЬКУЛЯТОР
+
+*/
+
+.calculator {
+  top: 180px;
+  background: #fff;
+  padding: 30px;
+  z-index: 1;
+  margin: 0 auto;
+  margin-bottom: 70px;
+  border-radius: 10px;
+  max-width: 550px;
+}
+
+.calculator .range {
+  font-size: 12px;
+  color: #8f8f8f;
+  margin-bottom: 20px;
+}
+
+.calculator .big {
+  font-size: 45px;
+}
+
+.calculator .gray{
+  font-size: 18px;
+  display: block;
+  color: #8f8f8f;
+}
+
+.calculator .middle {
+  font-size: 32px;
+}
+
+.calculator .middle img {
+  height: 23px;
+}
+
+.calculator .middle .gray {
+  font-size: 12px;
+}
+
+.calculator .slider {
+  height: 8px;
+  box-sizing: border-box;
+  background: #fff;
+  border: 1px solid #fff;
+  border-radius: 5px;
+  -webkit-box-shadow: 0px 0px 0px 2px rgba(236,242,248,1);
+  -moz-box-shadow: 0px 0px 0px 2px rgba(236,242,248,1);
+  box-shadow: 0px 0px 0px 2px rgba(236,242,248,1);
+  margin-bottom: 10px;
+}
+
+.calculator .slider .color {
+  position: relative;
+  margin: -6px -5px 0 0;
+  top: -11px;
+  height: 6px;
+  border-radius: 5px;
+  display: inline-block;
+  background: #ffdf42;
+  min-width: 5px;
+}
+
+
+
+/*
+
+МОДАЛЬНЫЕ ОКНА
+
+*/
+
+.arcticmodal-overlay, .arcticmodal-container {
+    position: fixed;
+    left: 0;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    z-index: 10000;
+}
+
+.arcticmodal-container {
+    overflow: auto;
+    margin: 0;
+    padding: 0;
+    border: 0;
+    border-collapse: collapse;
+}
+
+*:first-child + html .arcticmodal-container {
+    height: 100%;
+}
+
+.arcticmodal-container_i {
+    position: relative;
+    box-sizing: border-box;
+    margin: 0 auto;
+    padding: 50px;
+}
+
+.arcticmodal-container_i2 {
+    padding: 20px;
+    margin: 0;
+    vertical-align: middle;
+    border: none !important;
+}
+
+.box-modal {
+    display: block;
+    background: #fff;
+    border-radius: 10px;
+    padding: 20px;
+    margin: 30px;
+}
+
+
+
+/*
+
+АДАПТИВКА
+
+*/
+
+
+@media (max-width: 1100px) {
+
+  .adaptive-hide {
+    display: none;
+  }
+
+  .header-fixed {
+    position: relative;
+  }
+
+  .get-money-button {
+    display: none !important;
+  }
+
+  .m-p-promo {
+    display: block;
+    color: #000;
+    font-size: 30px;
+    padding: 20px 0 70px 0;
+  }
+
+  .m-p-promo h1, .m-p-promo h2, .m-p-promo h3, .m-p-promo h4, .m-p-promo h5, .m-p-promo h6, .m-p-promo .header-block {
+    display: block;
+    margin-top: 0;
+    font-family: 'museo';
+    line-height: 1.2;
+    letter-spacing: -.1rem;
+    font-size: 50px;
+    margin-bottom: 10px;
+    color: #000;
+  }
+
+  .main-p-subscribe label {
+    min-height: 16px;
+    line-height: 130%;
+    text-align: left;
+    padding: 0 0 10px 30px;
+  }
+
+  .main-p-calculator .calculator {
+    width: 100%;
+    float: none;
+  }
+
+  .main-p-calculator {
+    background: #f7f7f7;
+    position: relative;
+    padding: 70px 0;
+    margin-top: 0px;
+  }
+
+  .main-p-calculator .calculator {
+    margin-bottom: 0;
+  }
+
+  .calculator .range .columns{
+    width: 50%;
+  }
+
+  .main-p-header .owl-theme {
+    display: none;
+  }
+
+  .h-logo {
+    margin-bottom: 30px;
+  }
+
+  .owl1 {
+    display: none !important;
+  }
+
+  .logo-button .five {
+    width: 80%;
+  }
+
+  .logo-button .seven {
+    width: 20%;
+    margin-left: 0;
+  }
+
+  .main-p-memo {
+    margin-bottom: 50px;
+  }
+
+  .main-p-reviews .reviews-block {
+    margin-bottom: 0px;
+  }
+
+  .main-p-reviews .review {
+    position: relative;
+  }
+
+  .main-p-reviews .review:after {
+    display: inline-block;
+    content: '';
+    position: relative;
+    margin: 0 auto;
+    width: 60%;
+    height: 1px;
+    background: #ccc;
+  }
+
+  .gray-full-block, .white-full-block {
+    padding: 50px 0 50px 0;
+  }
+
+  .calculator .middle-line {
+    background: none;
+  }
+
+  .three-steps .four {
+    margin-bottom: 50px;
+  }
+
+  .three-steps .four:last-child {
+    margin-bottom: 20px;
+  }
+
+  .three-steps p {
+    margin-bottom: 0;
+  }
+
+  .lk-button {
+    display: none;
+  }
+
+  .mobile-app-block {
+    background: #fff;
+    padding: 50px 0;
+    min-height: 50px;
+    margin: 0;
+  }
+
+  .reviews-page .review h1, .reviews-page .review h2, .reviews-page .review h3, .reviews-page .review h4, .reviews-page .review h5, .reviews-page .review h6, .reviews-page .review .header-block {
+    font-size: 26px;
+    margin-bottom: 5px;
+  }
+
+  .owl-offers {
+    overflow: hidden !important;
+  }
+
+  .owl-offers .slide {
+    background-image: none !important;
+    padding: 50px 0;
+  }
+
+  .faq-page .question {
+    position: relative;
+  }
+
+  .faq-page .question .faq-arrow {
+    margin: -17px 0 0 -10px;
+    float: right;
+    position: absolute;
+    top: 55%;
+    left: 95%;
+  }
+
+  .inner-banner {
+    display: none;
+  }
+
+  .news-header, .faq-header, .pay-loan-header, .get-loan-header, .reviews-header, .about-header, .certifacates-header {
+    background-image: none;
+    min-height: 100px;
+  }
+
+  h1.header-h, h2.header-h, h3.header-h, h4.header-h, h5.header-h, h6.header-h, .header-h {
+    font-size: 50px;
+    color: #fff;
+    border-left: 6px #ffdf42 solid;
+    margin-top: 0px;
+    text-transform: uppercase;
+    padding: 0 0 0 30px;
+  }
+
+  .about-page, .reviews-page, .get-loan-page, .pay-loan-page, .faq-page, .news-page, .news-page-inner, .map-page, .partners-page, .certifacates-page {
+    padding: 70px 0 0 0;
+  }
+
+  .pay-loan-page .pay-option {
+    position: relative;
+    text-align: center;
+    background: #f7f7f7;
+    border-radius: 10px;
+    padding: 10px 10px;
+    margin-bottom: 30px;
+    box-sizing: border-box;
+    cursor: pointer;
+    text-align: left;
+    display: flex;
+    align-items: center;
+  }
+
+  .pay-loan-page .pay-option img {
+    display: inline-block;
+    float: left;
+    margin-right: 10px;
+    margin-bottom: 10px;
+    max-height: 50% !important;
+    height: auto;
+  }
+
+  .pay-loan-page .pay-option span{
+    display: inline-block;
+    color: #7c8496;
+    text-transform: uppercase;
+    font-weight: 500;
+    font-size: 11px;
+  }
+
+  .pay-loan-page .instant-pay {
+    background: #fff;
+    border-radius: 10px;
+    padding: 30px 30px 10px 30px;
+    margin-bottom: 70px;
+    font-size: 18px;
+  }
+
+  .instant-pay .form-data .label {
+    text-align: left;
+    height: auto;
+    min-height: 30px;
+    line-height: 130%;
+    padding: 0 0 10px 10px;
+    font-weight: 400;
+  }
+
+  .instant-pay .form-data .data {
+    height: auto;
+    min-height: 40px;
+    border-bottom: 1px solid #cbdae0;
+    margin-bottom: 30px;
+    line-height: 130%;
+    padding: 0 10px 15px 10px;
+  }
+
+  .pay-loan-page .instant-pay .back-link {
+    line-height: 130%;
+    margin-bottom: 30px;
+  }
+
+  .partners-page .partner-block h1, .partners-page .partner-block h2, .partners-page .partner-block h3, .partners-page .partner-block h4, .partners-page .partner-block h5, .partners-page .partner-block h6, .partners-page .partner-block .header-block {
+    margin-bottom: 30px;
+    text-align: center;
+  }
+
+  .partners-page .partner-block .partner-image {
+    position: relative;
+    display: block;
+    top: 0;
+    right: 0;
+    margin: 0 auto;
+    margin-bottom: 30px;
+  }
+
+  .footer .empty-30px-block {width: 20px;}
+
+}
+
+@media (max-width: 600px) {
+
+  .owl2 {
+    padding: 0 !important;
+  }
+
+}
+
+@media (max-width: 500px) {
+
+  .hamburger {
+    width: 40px;
+    height: 40px;
+    background-size: 100%;
+  }
+
+  .main-p-header, .header {
+    padding-top: 30px;
+  }
+
+  h1.header-h, h2.header-h, h3.header-h, h4.header-h, h5.header-h, h6.header-h, .header-h {
+    padding: 0 0 0 15px;
+    border-left: 3px #ffdf42 solid;
+    font-size: 30px;
+  }
+
+  .h-logo {
+    max-width: 200px;
+  }
+   .news-page-inner .news-block .img-block {
+    display: none;
+  }
+
+}
