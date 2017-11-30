@@ -11,12 +11,6 @@
                 <div class="column h-block"><h3>Кредитный рейтинг</h3></div>
             </div>
             <div class="row">
-                <div class="column bread-crumbs">
-                    <a href="#">Главная</a>
-                    Кредитный рейтинг
-                </div>
-            </div>
-            <div class="row">
                 <div class="column h-block-l"><h3>Личные данные</h3></div>
             </div>
             <div class="row">
@@ -36,7 +30,7 @@
             <div class="row">
                 <div class="columns four">
                     <label for="birthday">Дата рождения</label>
-                    <input name="birthday" id="birthday" v-model="user.birthday"/>
+                    <date-picker name="birthday" id="birthday" v-model="user.birthday" format="dd.MM.yyyy"/>
                 </div>
                 <div class="columns two">
                     <label>Пол</label>
@@ -53,15 +47,18 @@
             <div class="row">
                 <div class="columns four">
                     <label for="serie-and-number">Серия+Номер</label>
-                    <input name="serie-and-number" id="serie-and-number" v-model="seriesNumber"/>
+                    <masked-input :mask="[/\d/, /\d/, /\d/, /\d/, ' ', /\d/, /\d/, /\d/ , /\d/, /\d/, /\d/ ]"
+                                  name="serie-and-number" id="serie-and-number" v-model="seriesNumber"/>
                 </div>
                 <div class="columns four">
                     <label for="division-code">Код подразделения</label>
-                    <input name="division-code" id="division-code" v-model="user.p_code"/>
+                    <masked-input id="division-code" v-model="user.p_code"
+                                  :mask="[/\d/, /\d/, /\d/, '-', /\d/, /\d/, /\d/ ]"
+                                  placeholder="___-___"></masked-input>
                 </div>
                 <div class="columns four">
                     <label for="date-of-issue">Дата выдачи</label>
-                    <input name="date-of-issue" id="date-of-issue" type="text" placeholder=""/>
+                    <date-picker name="date-of-issue" id="date-of-issue" v-model="user.p_date" format="dd.MM.yyyy"/>
                 </div>
             </div>
             <div class="row">
@@ -69,7 +66,7 @@
                 </div>
                 <div class="columns eight">
                     <label for="issued-by">Кем выдан</label>
-                    <input name="issued-by" id="issued-by" type="text" placeholder=""/>
+                    <input name="issued-by" id="issued-by" v-model="user.p_from"/>
                 </div>
             </div>
 
@@ -79,8 +76,7 @@
             <div class="row">
                 <div class="columns four">
                     <label>Вид занятости</label>
-                    <select data-placeholder="&nbsp;" class="selector-block">
-                        <option value="">&nbsp;</option>
+                    <select data-placeholder="&nbsp;" class="selector-block" v-model="user.work_vid">
                         <option value="1">Наемный сотрудник</option>
                         <option value="2">Индивидуальный предприниматель</option>
                         <option value="3">Учредитель/участник ООО</option>
@@ -89,9 +85,9 @@
                         <option value="6">Безработный</option>
                     </select>
                 </div>
-                <div class="columns four">
-                    <label for="scope-of-the-company">Сфера деятельности организации</label>
-                    <input name="scope-of-the-company" id="scope-of-the-company" type="text" placeholder=""/>
+                <div class="columns four" v-if="user.work_vid == 1">
+                    <label for="scope-of-the-company" >Сфера деятельности организации</label>
+                    <input name="scope-of-the-company" id="scope-of-the-company" v-model="user.work_sphere"/>
                 </div>
                 <div class="columns four">
                     <label for="monthly-income">Ежемесячный доход</label>
@@ -115,7 +111,7 @@
 
             <div class="row marg-b-10">
                 <div class="column center checkbox">
-                    <input type="checkbox" name="strange-computer" value="male" id="strange-computer"/>
+                    <input type="checkbox" id="strange-computer" value="male" v-model="agree"/>
                     <label for="strange-computer"><span></span>Я даю согласие на <a href="#" class="dashed gray">обработку и хранение</a>
                         моих персональных данных</label>
                 </div>
@@ -123,7 +119,8 @@
 
             <div class="row marg-b-10">
                 <div class="column center">
-                    <button class="green button-img check-mark" @click="sendToApi">Перейти к оплате</button>
+                    <button class="green button-img check-mark" @click="sendToApi" :disabled="!agree">Перейти к оплате
+                    </button>
                 </div>
             </div>
         </div>
@@ -131,9 +128,14 @@
 </template>
 <script>
   import MaskedInput from 'vue-text-mask'
+  import config from '../config/index'
+  import DatePicker from 'vuejs-datepicker'
 
   export default {
-    components: {MaskedInput},
+    components: {
+      MaskedInput,
+      DatePicker
+    },
     data: function () {
       return {
         user: {
@@ -147,15 +149,14 @@
           p_code: '',
           p_date: '',
           a_reg_subject: '',
-          a_reg_city: '',
+          profit_month: '',
           work_subject: '',
           mobile_phone: '',
-          a_reg_index: '',
-          phone_check: '',
-          email: '',
-          id: 1
+          work_sphere: '',
+          work_vid: ''
         },
-        errors: {}
+        errors: {},
+        agree: false
       }
     },
     computed: {
@@ -170,17 +171,28 @@
         }
       }
     },
-    watch: {},
+    watch: {
+      'user.p_code': function (value) {
+        const trimValue = value.replace(/_/g, '')
+        if (trimValue.length === 7) {
+          this.getPFrom()
+        }
+      }
+    },
     methods: {
+      getPFrom: function () {
+        this.$http.get(
+          config.OLD_API + '/passport?action=get&code=' + this.user.p_code,
+        ).then(response => {
+          this.user.p_from = response.body.data.title
+        }).catch((error) => console.log(error))
+      },
       sendToApi: function () {
         const creds = this._.pickBy(this.user, (property, propertyName) => property !== '')
-        console.log('creds', creds)
         this.$http.post('shop/createuser', creds)
-          .then(response => {
-            console.log(response)
-            this.errors = response.body.errors ? response.body.errors : ''
-          })
-          .catch(error => console.log(error))
+          .then(response => console.log(response.body))
+          .catch(() => console.log(config.API)
+          )
       }
     }
   }

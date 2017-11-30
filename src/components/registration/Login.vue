@@ -19,7 +19,7 @@
                     <div>
                         <div>Фамилия</div>
                         <input name="tr_last_name" id="tr_last_name"
-                                      v-model="user.lastName"
+                               v-model="user.lastName"
                         />
                         <p style=""></p>
                     </div>
@@ -129,12 +129,8 @@
     },
     methods: {
       register: function () {
-        const data = {
-          user: this.user,
-          code: this.verificationCode
-        }
-        this.$http.post('/verifysms', data)
-          .then(response => console.log(1111))
+        this.$http.post('/verifysms', this.user)
+          .then(response => console.log(111))
           .catch(err => console.log(err))
       },
       getVerificationSms: function () {

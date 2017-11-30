@@ -28,7 +28,9 @@ Vue.use(VueLodash, lodash)
 Auth.checkAuth()
 
 // set API URL for vue-resource
+/*
 Vue.http.options.root = 'http://webbankir.zend'
+*/
 
 // eslint-disable-next-line
 new Vue({
@@ -49,4 +51,6 @@ Vue.http.interceptors.push((request, next) => {
   if (store.getters.getAuthorized) {
     request.headers.set('Authorization', 'Bearer ' + store.getters.getToken)
   }
+  next()
 })
+

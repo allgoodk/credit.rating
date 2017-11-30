@@ -1,8 +1,8 @@
 import Vue from 'vue'
 import Router from 'vue-router'
-
 import { store } from '../store/store.js'
 
+// Components import
 import Login from '@/components/registration/Login'
 import Questionnaire from '@/components/questionnaire'
 
