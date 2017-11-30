@@ -19,10 +19,7 @@ const router = new Router({
     {
       path: '/questionnaire',
       name: 'Questionnaire',
-      component: Questionnaire,
-      meta: {
-        auth: true
-      }
+      component: Questionnaire
     }
   ],
   redirect: {

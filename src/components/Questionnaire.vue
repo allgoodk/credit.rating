@@ -13,15 +13,7 @@
             <div class="row">
                 <div class="column bread-crumbs">
                     <a href="#">Главная</a>
-                    &rarr;
                     Кредитный рейтинг
-                </div>
-            </div>
-            <div class="row navigation">
-                <div class="column">
-                    <a href="#" class="nav-item nav1 success">Заполнение анкеты</a>
-                    <span class="nav-item nav2 active">Оплата</span>
-                    <span class="nav-item nav3">Кредитный рейтинг</span>
                 </div>
             </div>
             <div class="row">
@@ -30,28 +22,28 @@
             <div class="row">
                 <div class="columns four">
                     <label for="surname">Фамилия</label>
-                    <input name="surname" id="surname" type="text" placeholder=""/>
+                    <input name="surname" id="surname" v-model="user.last_name"/>
                 </div>
                 <div class="columns four">
                     <label for="name">Имя</label>
-                    <input name="name" id="name" type="text" placeholder=""/>
+                    <input name="name" id="name" v-model="user.first_name"/>
                 </div>
                 <div class="columns four">
                     <label for="patronymic">Отчество</label>
-                    <input name="patronymic" id="patronymic" type="text" placeholder=""/>
+                    <input name="patronymic" id="patronymic" v-model="user.middle_name"/>
                 </div>
             </div>
             <div class="row">
                 <div class="columns four">
                     <label for="birthday">Дата рождения</label>
-                    <input name="birthday" id="birthday" type="text" placeholder=""/>
+                    <input name="birthday" id="birthday" v-model="user.birthday"/>
                 </div>
-                <div class="columns four checkbox">
-                    <span class="label">Пол</span>
-                    <input type="radio" name="gender" id="gender-male"/>
-                    <label for="gender-male"><span></span>мужчина</label>
-                    <input type="radio" name="gender" id="gender-female"/>
-                    <label for="gender-female"><span></span>женщина</label>
+                <div class="columns two">
+                    <label>Пол</label>
+                    <select data-placeholder="" v-model="user.male">
+                        <option value="1">Мужской</option>
+                        <option value="2">Женский</option>
+                    </select>
                 </div>
             </div>
 
@@ -61,7 +53,7 @@
             <div class="row">
                 <div class="columns four">
                     <label for="serie-and-number">Серия+Номер</label>
-                    <input name="serie-and-number" id="serie-and-number" type="text" placeholder=""/>
+                    <input name="serie-and-number" id="serie-and-number" v-model="seriesNumber"/>
                 </div>
                 <div class="columns four">
                     <label for="division-code">Код подразделения</label>
@@ -112,10 +104,6 @@
             </div>
             <div class="row marg-b-10">
                 <div class="columns four">
-                    <label for="SNILS">СНИЛС</label>
-                    <input name="SNILS" id="SNILS" type="text" placeholder=""/>
-                </div>
-                <div class="columns four">
                     <label for="education">Образование</label>
                     <input name="education" id="education" type="text" placeholder=""/>
                 </div>
@@ -128,7 +116,8 @@
             <div class="row marg-b-10">
                 <div class="column center checkbox">
                     <input type="checkbox" name="strange-computer" value="male" id="strange-computer"/>
-                    <label for="strange-computer"><span></span>Я даю согласие на <a href="#" class="dashed gray">обработку и хранение</a> моих персональных данных</label>
+                    <label for="strange-computer"><span></span>Я даю согласие на <a href="#" class="dashed gray">обработку и хранение</a>
+                        моих персональных данных</label>
                 </div>
             </div>
 
@@ -143,13 +132,17 @@
     </div>
 </template>
 <script>
+  import MaskedInput from 'vue-text-mask'
+
   export default {
+    components: {MaskedInput},
     data: function () {
       return {
         user: {
           last_name: '',
           first_name: '',
           middle_name: '',
+          male: '',
           p_number: '',
           p_serie: '',
           p_from: '',
@@ -165,6 +158,17 @@
           id: 1
         },
         errors: {}
+      }
+    },
+    computed: {
+      seriesNumber: {
+        get: function () {
+          return this.user.p_serie + ' ' + this.user.p_number
+        },
+        set: function (value) {
+          this.user.p_serie = value.replace(/\s/g, '').slice(0, 4)
+          this.user.p_number = value.replace(/\s/g, '').slice(4, 10)
+        }
       }
     },
     methods: {
