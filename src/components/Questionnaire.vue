@@ -86,12 +86,12 @@
                     </select>
                 </div>
                 <div class="columns four" v-if="user.work_vid == 1">
-                    <label for="scope-of-the-company" >Сфера деятельности организации</label>
+                    <label for="scope-of-the-company">Сфера деятельности организации</label>
                     <input name="scope-of-the-company" id="scope-of-the-company" v-model="user.work_sphere"/>
                 </div>
                 <div class="columns four">
                     <label for="monthly-income">Ежемесячный доход</label>
-                    <input name="monthly-income" id="monthly-income" type="text" placeholder=""/>
+                    <input name="monthly-income" id="monthly-income" v-model="user.profit_month"/>
                 </div>
             </div>
 
@@ -101,11 +101,11 @@
             <div class="row marg-b-10">
                 <div class="columns four">
                     <label for="education">Образование</label>
-                    <input name="education" id="education" type="text" placeholder=""/>
+                    <input name="education" id="education" v-model="user.obr"/>
                 </div>
                 <div class="columns four">
                     <label for="information-source">Откуда вы о нас узнали?</label>
-                    <input name="information-source" id="information-source" type="text" placeholder=""/>
+                    <input name="information-source" id="information-source" v-model="user.from_where"/>
                 </div>
             </div>
 
@@ -116,12 +116,16 @@
                         моих персональных данных</label>
                 </div>
             </div>
-
             <div class="row marg-b-10">
                 <div class="column center">
-                    <button class="green button-img check-mark" @click="sendToApi" :disabled="!agree">Перейти к оплате
+                    <button class="green button-img check-mark" @click="goToPay" :disabled="!agree">Перейти к оплате
                     </button>
                 </div>
+            </div>
+            <div class="row marg-b-10">
+<dadata>
+
+</dadata>
             </div>
         </div>
     </div>
@@ -130,9 +134,11 @@
   import MaskedInput from 'vue-text-mask'
   import config from '../config/index'
   import DatePicker from 'vuejs-datepicker'
+  import Dadata from '../utils/Dadata'
 
   export default {
     components: {
+      Dadata,
       MaskedInput,
       DatePicker
     },
@@ -148,9 +154,9 @@
           p_from: '',
           p_code: '',
           p_date: '',
-          a_reg_subject: '',
+          obr: '',
           profit_month: '',
-          work_subject: '',
+          from_where: '',
           mobile_phone: '',
           work_sphere: '',
           work_vid: ''
@@ -187,7 +193,7 @@
           this.user.p_from = response.body.data.title
         }).catch((error) => console.log(error))
       },
-      sendToApi: function () {
+      goToPay: function () {
         const creds = this._.pickBy(this.user, (property, propertyName) => property !== '')
         this.$http.post('shop/createuser', creds)
           .then(response => console.log(response.body))
