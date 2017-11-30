@@ -57,7 +57,7 @@
                 </div>
                 <div class="columns four">
                     <label for="division-code">Код подразделения</label>
-                    <input name="division-code" id="division-code" type="text" placeholder=""/>
+                    <input name="division-code" id="division-code" v-model="user.p_code"/>
                 </div>
                 <div class="columns four">
                     <label for="date-of-issue">Дата выдачи</label>
@@ -123,11 +123,9 @@
 
             <div class="row marg-b-10">
                 <div class="column center">
-                    <button class="green button-img check-mark">Перейти к оплате</button>
+                    <button class="green button-img check-mark" @click="sendToApi">Перейти к оплате</button>
                 </div>
             </div>
-
-
         </div>
     </div>
 </template>
@@ -166,19 +164,22 @@
           return this.user.p_serie + ' ' + this.user.p_number
         },
         set: function (value) {
-          this.user.p_serie = value.replace(/\s/g, '').slice(0, 4)
-          this.user.p_number = value.replace(/\s/g, '').slice(4, 10)
+          const trimmedValue = value.replace(/\s/g, '')
+          this.user.p_serie = trimmedValue.slice(0, 4)
+          this.user.p_number = trimmedValue.slice(4, 10)
         }
       }
     },
+    watch: {},
     methods: {
       sendToApi: function () {
-        const creds = this._.pickBy(this.user, (property, propertyName) => { return property !== '' })
-        console.log(creds)
-        this.$http.post('http://webbankir.zend/shop/createuser', creds).then(response => {
-          console.log(response.body)
-          this.errors = response.body.errors ? response.body.errors : ''
-        })
+        const creds = this._.pickBy(this.user, (property, propertyName) => property !== '')
+        console.log('creds', creds)
+        this.$http.post('shop/createuser', creds)
+          .then(response => {
+            console.log(response)
+            this.errors = response.body.errors ? response.body.errors : ''
+          })
           .catch(error => console.log(error))
       }
     }
