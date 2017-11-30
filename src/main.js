@@ -30,6 +30,7 @@ Vue.http.options.root = 'http://webbankir.zend'
 new Vue({
   el: '#app',
   auth,
+  lodash,
   router,
   store,
   template: '<App/>',

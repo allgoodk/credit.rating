@@ -4,7 +4,6 @@ import auth from '../auth'
 
 import { store } from '../store/store.js'
 
-import Api from '@/components/Api'
 import Login from '@/components/registration/Login'
 
 Vue.use(Router)
@@ -16,15 +15,10 @@ const router = new Router({
       path: '/',
       name: 'Login',
       component: Login
-    },
-    {
-      path: '/api',
-      name: 'Api',
-      component: Api
     }
   ],
   redirect: {
-    '*': '/home'
+    '*': '/login'
   }
 })
 
