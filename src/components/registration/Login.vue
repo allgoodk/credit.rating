@@ -18,8 +18,8 @@
                 <div class="columns six">
                     <div>
                         <div>Фамилия</div>
-                        <masked-input name="tr_last_name" id="tr_last_name" placeholder="" value=""
-                                      v-model="user.lastName" :mask="[/^\d/]"
+                        <input name="tr_last_name" id="tr_last_name"
+                                      v-model="user.lastName"
                         />
                         <p style=""></p>
                     </div>

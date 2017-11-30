@@ -1,5 +1,6 @@
 import router from '../router/index.js'
 import {store} from '../store/store'
+
 export default {
   user: {
     authenticated: false
@@ -28,15 +29,6 @@ export default {
   },
 
   checkAuth () {
-    const jwt = localStorage.getItem('access_token')
-    if (jwt) {
-      this.user.authenticated = true
-    } else {
-      this.user.authenticated = false
-    }
-  },
-
-  signIn () {
     const jwt = localStorage.getItem('access_token')
     if (jwt) {
       store.commit('setAuthorized')

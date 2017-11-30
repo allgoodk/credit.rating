@@ -17,11 +17,15 @@ require('../static/css/skeleton.css')
 
 // import store
 import { store } from './store/store.js'
+import Auth from './auth/index.js'
 
 Vue.config.productionTip = false
 Vue.use(Vuex)
 Vue.use(VueResource)
 Vue.use(VueLodash, lodash)
+
+// Check auth status when refreshing page or reopen tab
+Auth.checkAuth()
 
 // set API URL for vue-resource
 Vue.http.options.root = 'http://webbankir.zend'
@@ -41,13 +45,8 @@ new Vue({
 Vue.http.options.emulateJSON = true
 
 // Добавляем токен к авторизации
-/*
 Vue.http.interceptors.push((request, next) => {
-  console.log('Bearer ' + store.getters.getToken)
-
-  if (store.getters.getToken) {
+  if (store.getters.getAuthorized) {
     request.headers.set('Authorization', 'Bearer ' + store.getters.getToken)
   }
-
 })
-*/
