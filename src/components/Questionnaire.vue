@@ -97,7 +97,7 @@
             <div class="row">
                 <div class="column h-block-l"><h3>Адрес регистрации</h3></div>
             </div>
-            <dadata prefix="a_reg_">
+            <dadata prefix="a_reg_" @selectAddress="setUserValues">
             </dadata>
             <div class="row">
                 <div class="column h-block-l"><h3>Дополнительно</h3></div>
@@ -145,6 +145,7 @@
     data: function () {
       return {
         user: {
+          city: '',
           last_name: '',
           first_name: '',
           middle_name: '',
@@ -199,6 +200,12 @@
           .then(response => console.log(response.body))
           .catch(() => console.log(config.API)
           )
+      },
+      setUserValues: function (values) {
+        console.log('house obj', values)
+        this.user = {...this.user, ...values}
+        const res = {...this.user, ...values}
+        console.log(res)
       }
     }
   }

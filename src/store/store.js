@@ -5,7 +5,24 @@ Vue.use(Vuex)
 
 export const store = new Vuex.Store({
   state: {
-    user: {},
+    user: {
+      city: '',
+      last_name: '',
+      first_name: '',
+      middle_name: '',
+      male: '',
+      p_number: '',
+      p_serie: '',
+      p_from: '',
+      p_code: '',
+      p_date: '',
+      obr: '',
+      profit_month: '',
+      from_where: '',
+      mobile_phone: '',
+      work_sphere: '',
+      work_vid: ''
+    },
     authorized: false,
     token: ''
   },
@@ -15,6 +32,9 @@ export const store = new Vuex.Store({
     },
     setUser (state, user) {
       state.user = user.body.data.user
+    },
+    setUserValues (state, values) {
+      state.user = {...state.user, ...values}
     },
     setToken (state, token) {
       state.token = token
