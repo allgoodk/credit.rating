@@ -204,8 +204,6 @@
       setUserValues: function (values) {
         console.log('house obj', values)
         this.user = {...this.user, ...values}
-        const res = {...this.user, ...values}
-        console.log(res)
       }
     }
   }

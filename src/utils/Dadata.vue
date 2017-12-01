@@ -212,6 +212,12 @@
           return
         }
       },
+      address: {
+        handler: function () {
+          this.$emit('selectAddress', this.address)
+        },
+        deep: true
+      },
       noStreet: function () {
         if (this.noStreet) {
           this.address.street = this.address.street_value = this.address.street_guid = 'wb_not_street'
@@ -262,7 +268,6 @@
       selectHouse () {
         this.isOpenHouse = false
         this.address.house = this.address.house_value = this.suggestions[this.selectedItem].data.house
-        this.$emit('selectAddress', this.address)
       },
       onInputHouse (value) {
         this.selectedItem = 0
@@ -317,7 +322,7 @@
           if (this.currentChoice !== undefined) {
             this.keyword = this.currentChoice.value
           }
-        }).then(() => { this.$emit('selectAddress', this.address) })
+        })
       },
       getPreparedField (str, reg) {
         const res = str.split(', ').filter(element => !element.search(reg)).join('').replace(reg, '')
