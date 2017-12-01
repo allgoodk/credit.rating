@@ -58,7 +58,7 @@
             <input :id="prefix +'street_value'" :name="prefix +'street_value'" type="hidden"
                    v-model="street_value" value="">
             <input :id="prefix + 'house_value'" :name="prefix + 'house_value'" type="hidden"
-                   autocomplete=off                         v-model="house_value" value="">
+                   autocomplete=off                           v-model="house_value" value="">
             <input :id="prefix +'house_guid'" :name="prefix + 'house_guid'" type="hidden"
                    v-model="house_guid" value="">
         </div>
@@ -298,6 +298,7 @@
       selectHouse () {
         this.isOpenHouse = false
         this.house = this.house_value = this.suggestions[this.selectedItem].data.house
+        const houseData = {}
       },
       onInputHouse (value) {
         this.selectedItem = 0
