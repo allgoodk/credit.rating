@@ -94,7 +94,11 @@
                     <input name="monthly-income" id="monthly-income" v-model="user.profit_month"/>
                 </div>
             </div>
-
+            <div class="row">
+                <div class="column h-block-l"><h3>Адрес регистрации</h3></div>
+            </div>
+            <dadata prefix="a_reg_">
+            </dadata>
             <div class="row">
                 <div class="column h-block-l"><h3>Дополнительно</h3></div>
             </div>
@@ -108,7 +112,6 @@
                     <input name="information-source" id="information-source" v-model="user.from_where"/>
                 </div>
             </div>
-
             <div class="row marg-b-10">
                 <div class="column center checkbox">
                     <input type="checkbox" id="strange-computer" value="male" v-model="agree"/>
@@ -123,9 +126,6 @@
                 </div>
             </div>
             <div class="row marg-b-10">
-<dadata>
-
-</dadata>
             </div>
         </div>
     </div>

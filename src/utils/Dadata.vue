@@ -18,7 +18,7 @@
 <li v-for="(option, index) in streetOptions" :class="{'highlighted': index === selectedItem}"
     @mouseenter="selectedItem = index" @mousedown="select"> {{ option.value}}
 <slot name="item"
-      :title="option.value"
+      :title="option.value"></slot>
  </li>
 </ul>
 </span>
@@ -58,7 +58,7 @@
             <input :id="prefix +'street_value'" :name="prefix +'street_value'" type="hidden"
                    v-model="street_value" value="">
             <input :id="prefix + 'house_value'" :name="prefix + 'house_value'" type="hidden"
-                   autocomplete=off             v-model="house_value" value="">
+                   autocomplete=off                         v-model="house_value" value="">
             <input :id="prefix +'house_guid'" :name="prefix + 'house_guid'" type="hidden"
                    v-model="house_guid" value="">
         </div>
@@ -133,7 +133,7 @@
             <div class="columns two dispensable" data="form-error">
                 <div class="form-field">
                                         <span class="float-label-container">
-                            <div class="floating-label" :style="[stroenie === '' ? '': 'filled']">Строение</div>' +
+                            <div class="floating-label" :style="[stroenie === '' ? '': 'filled']">Строение</div>
                          <input :id="prefix+'stroenie'" :name="prefix+'stroenie'" v-model="stroenie" type="text"
                                 class="big form-control" tabindex="15" value="">
                           <p class="hidden" style=""></p>
@@ -198,8 +198,7 @@
         noStreet: false
 
       }
-    }
-    ,
+    },
     computed: {
       streetOptions () {
         return this.suggestions
@@ -266,22 +265,23 @@
             value: 'street'
           }
         }
-        this.$http.post(this.url, data).then((response) => {
-          this.suggestions = response.suggestions
+        this.$http.post(this.url, JSON.stringify(data)).then((response) => {
+          response = JSON.parse(JSON.stringify(response))
+          this.suggestions = response.body.suggestions
         })
       },
       moveDown () {
         if (!this.isOpen && !this.isOpenHouse) {
           return
         }
-        this.selectedItem = (this.selectedItem + 1) % this.rowCount
+        this.selectedItem = (this.selectedItem + 1) % this.suggestions.length
         this.suggestions.length > 1 ? this.keyword = (this.suggestions[this.selectedItem].value) : null
       },
       moveUp () {
         if (!this.isOpen && !this.isOpenHouse) {
           return
         }
-        this.selectedItem = this.selectedItem - 1 < 0 ? this.rowCount - 1 : this.selectedItem - 1
+        this.selectedItem = this.selectedItem - 1 < 0 ? this.suggestions.length - 1 : this.selectedItem - 1
         this.suggestions.length > 1 ? this.keyword = (this.suggestions[this.selectedItem].value) : null
       },
       select () {
@@ -295,11 +295,62 @@
         }
         this.suggest(query)
       },
+      selectHouse () {
+        this.isOpenHouse = false
+        this.house = this.house_value = this.suggestions[this.selectedItem].data.house
+      },
+      onInputHouse (value) {
+        this.selectedItem = 0
+        if ((this.street === null || this.street === 'wb_not_street') && this.noStreet) {
+          this.house = value
+          this.street = this.street_guid = this.street_value = 'wb_not_street'
+          return
+        }
+        this.isOpenHouse = !!value
+        const data = {
+          locations: [
+            {
+              street_fias_id: this.street_guid === 'wb_not_street' ? this.city2_guid : this.street_guid
+            }
+          ],
+          query: value,
+          from_bound: {
+            value: 'house'
+          },
+          to_bound: {
+            value: 'house'
+          },
+          restrict_value: true
+        }
+        this.$http.post(this.url, JSON.stringify(data)).then((response) => {
+          this.houseSuggestions = []
+          response = JSON.parse(JSON.stringify(response))
+          this.suggestions = response.body.suggestions
+          this.suggestions.forEach((item) => {
+            this.houseSuggestions.push(item.data.house)
+          })
+        })
+      },
+      moveDownHouse () {
+        if (!this.isOpen && !this.isOpenHouse) {
+          return
+        }
+        this.selectedItem = (this.selectedItem + 1) % this.suggestions.length
+        this.suggestions.length > 1 && this.suggestions[this.selectedItem].data.house !== undefined ? this.house = (this.suggestions[this.selectedItem].data.house) : null
+      },
+      moveUpHouse () {
+        if (!this.isOpen && !this.isOpenHouse) {
+          return
+        }
+        this.selectedItem = this.selectedItem - 1 < 0 ? this.suggestions.length - 1 : this.selectedItem - 1
+        this.suggestions.length > 1 ? this.house = (this.suggestions[this.selectedItem].data.house) : null
+      },
       suggest (query) {
-        this.$http.post(this.url, query).then((response) => {
-          this.currentChoice = response.suggestions[0]
+        this.$http.post(this.url, JSON.stringify(query)).then((response) => {
+          response = JSON.parse(JSON.stringify(response))
+          this.currentChoice = response.body.suggestions[0]
           if (this.currentChoice !== undefined) {
-              this.keyword = this.currentChoice.value
+            this.keyword = this.currentChoice.value
           }
         })
       },
@@ -309,8 +360,11 @@
       }
     },
     mounted: function () {
-      const fullAddress = localStorage.get('wb_full_address')
+      const fullAddress = localStorage.getItem('wb_full_address')
       if (fullAddress !== undefined) this.keyword = fullAddress
     }
   }
 </script>
+
+<style>
+</style>

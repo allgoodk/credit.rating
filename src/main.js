@@ -47,10 +47,12 @@ new Vue({
 Vue.http.options.emulateJSON = true
 
 // Добавляем токен к авторизации
+/*
 Vue.http.interceptors.push((request, next) => {
   if (store.getters.getAuthorized) {
     request.headers.set('Authorization', 'Bearer ' + store.getters.getToken)
   }
   next()
 })
+*/
 
