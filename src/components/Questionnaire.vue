@@ -13,63 +13,11 @@
       <div class="row">
         <div class="column h-block-l"><h3>Личные данные</h3></div>
       </div>
-      <div class="row">
-        <div class="columns four">
-          <label for="surname">Фамилия</label>
-          <input name="surname" id="surname" v-model="user.last_name"/>
-        </div>
-        <div class="columns four">
-          <label for="name">Имя</label>
-          <input name="name" id="name" v-model="user.first_name"/>
-        </div>
-        <div class="columns four">
-          <label for="patronymic">Отчество</label>
-          <input name="patronymic" id="patronymic" v-model="user.middle_name"/>
-        </div>
-      </div>
-      <div class="row">
-        <div class="columns four">
-          <label for="birthday">Дата рождения</label>
-          <date-picker name="birthday" id="birthday" v-model="user.birthday" format="dd.MM.yyyy"/>
-        </div>
-        <div class="columns two">
-          <label>Пол</label>
-          <select data-placeholder="" v-model="user.male">
-            <option value="1">Мужской</option>
-            <option value="2">Женский</option>
-          </select>
-        </div>
-      </div>
-
+      <user-personal-information @inputUserPersonalInformation="setUserValues"></user-personal-information>
       <div class="row">
         <div class="column h-block-l"><h3>Паспортные данные</h3></div>
       </div>
-      <div class="row">
-        <div class="columns four">
-          <label for="serie-and-number">Серия+Номер</label>
-          <masked-input :mask="[/\d/, /\d/, /\d/, /\d/, ' ', /\d/, /\d/, /\d/ , /\d/, /\d/, /\d/ ]"
-                        name="serie-and-number" id="serie-and-number" v-model="seriesNumber"/>
-        </div>
-        <div class="columns four">
-          <label for="division-code">Код подразделения</label>
-          <masked-input id="division-code" v-model="user.p_code"
-                        :mask="[/\d/, /\d/, /\d/, '-', /\d/, /\d/, /\d/ ]"
-                        placeholder="___-___"></masked-input>
-        </div>
-        <div class="columns four">
-          <label for="date-of-issue">Дата выдачи</label>
-          <date-picker name="date-of-issue" id="date-of-issue" v-model="user.p_date" format="dd.MM.yyyy"/>
-        </div>
-      </div>
-      <div class="row">
-        <div class="columns four">
-        </div>
-        <div class="columns eight">
-          <label for="issued-by">Кем выдан</label>
-          <input name="issued-by" id="issued-by" v-model="user.p_from"/>
-        </div>
-      </div>
-
+      <user-passport-data @inputUserPassportData="setUserValues"></user-passport-data>
       <div class="row">
         <div class="column h-block-l"><h3>Информация о работе и доходе</h3></div>
       </div>
@@ -133,15 +81,18 @@
 </template>
 <script>
   import MaskedInput from 'vue-text-mask'
-  import config from '../config/index'
   import DatePicker from 'vuejs-datepicker'
   import Dadata from '../utils/Dadata'
+  import UserPassportData from './questionnaire/UserPassportData'
+  import UserPersonalInformation from './questionnaire/UserPersonalInformation'
 
   export default {
     components: {
       Dadata,
+      UserPersonalInformation,
       MaskedInput,
-      DatePicker
+      DatePicker,
+      UserPassportData
     },
     data: function () {
       return {
@@ -167,50 +118,18 @@
         agree: false
       }
     },
-    computed: {
-      seriesNumber: {
-        get: function () {
-          return this.user.p_serie + ' ' + this.user.p_number
-        },
-        set: function (value) {
-          const trimmedValue = value.replace(/\s/g, '')
-          this.user.p_serie = trimmedValue.slice(0, 4)
-          this.user.p_number = trimmedValue.slice(4, 10)
-        }
-      }
-    },
-    watch: {
-      'user.p_code': function (value) {
-        const trimValue = value.replace(/_/g, '')
-        if (trimValue.length === 7) {
-          this.getPFrom()
-        }
-      }
-    },
     methods: {
-      getPFrom: function () {
-        const code = {
-          code: this.user.p_code
-        }
-        this.$http.post(config.API + '/suggest/passportcode', code).then(response => {
-          this.user.p_from = response.body.data.title
-        }).catch((error) => console.log(error))
-      },
       goToPay: function () {
         const creds = this._.pickBy(this.user, (property, propertyName) => property !== '')
+        console.log(creds)
         this.$http.post('shop/createuser', creds)
           .then(response => console.log(response.body))
-          .catch(() => console.log(config.API)
+          .catch(() => console.log(creds)
           )
       },
       setUserValues: function (values) {
         this.user = {...this.user, ...values}
       }
-    },
-    mounted: function () {
-      const savedUser = this.$store.getters.getUser
-      this.user = {...this.user, ...savedUser}
-      console.log(this.user)
     }
   }
 </script>
