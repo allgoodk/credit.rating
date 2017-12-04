@@ -4,7 +4,7 @@ import { store } from '../store/store.js'
 
 // Components import
 import Login from '@/components/registration/Login'
-import Questionnaire from '@/components/questionnaire'
+import Questionnaire from '@/components/Questionnaire'
 
 Vue.use(Router)
 

@@ -1,5 +1,5 @@
 <template>
-  <div class="content">
+  <form v-on:submit.prevent="goToPay">
     <div class="container content-wrapper-20">
       <div class="row">
         <div class="columns eight">
@@ -52,22 +52,22 @@
       </div>
       <div class="row marg-b-10">
         <div class="column center">
-          <button class="green button-img check-mark" @click="goToPay" :disabled="!agree">Перейти к оплате
+          <button class="green button-img check-mark" :disabled="!agree">Перейти к оплате
           </button>
         </div>
       </div>
       <div class="row marg-b-10">
       </div>
     </div>
-  </div>
+  </form>
 </template>
 <script>
   import MaskedInput from 'vue-text-mask'
   import DatePicker from 'vuejs-datepicker'
   import Dadata from '../utils/Dadata'
-  import UserPassportData from './questionnaire/UserPassportData'
-  import UserPersonalInformation from './questionnaire/UserPersonalInformation'
-  import UserWorkInformation from './questionnaire/UserWorkInfromation'
+  import UserPassportData from './User/UserPassportData'
+  import UserPersonalInformation from './User/UserPersonalInformation'
+  import UserWorkInformation from './User/UserWorkInfromation'
 
   export default {
     components: {
@@ -80,31 +80,14 @@
     },
     data: function () {
       return {
-        user: {
-          city: '',
-          last_name: '',
-          first_name: '',
-          middle_name: '',
-          male: '',
-          p_number: '',
-          p_serie: '',
-          p_from: '',
-          p_code: '',
-          p_date: '',
-          obr: '',
-          profit_month: '',
-          from_where: '',
-          mobile_phone: '',
-          work_sphere: '',
-          work_vid: ''
-        },
+        user: {},
         errors: {},
         agree: false
       }
     },
     methods: {
       goToPay: function () {
-        const creds = this._.pickBy(this.user, (property, propertyName) => property !== '')
+        const creds = this._.pickBy(this.user, (property, propertyName) => property !== '' && property !== null)
         console.log(creds)
         this.$http.post('shop/createuser', creds)
           .then(response => console.log(response.body))
@@ -119,16 +102,4 @@
 </script>
 
 <style scoped lang="sass">
-  .error
-    margin-top: -10px
-    color: red
-    h1
-      text-align: center
-
-      .wrapper-20
-        background-color: #f7f6f6
-        height: 20px
-
-      .center
-        text-align: center
 </style>

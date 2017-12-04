@@ -58,6 +58,7 @@
     },
     mounted: function () {
       const savedUser = this.$store.getters.getUser
+      console.log(this.vuelidate)
       this.user = {...this.user, ...savedUser}
     }
   }

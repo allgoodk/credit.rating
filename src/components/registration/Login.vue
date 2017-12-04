@@ -1,15 +1,18 @@
 <template>
   <div class="content">
-    <form v-on:submit.prevent="getVerificationSms">
+    <form v-on:submit.prevent="requestVerificationCode">
       <div class="row">
         <div class="columns three"></div>
         <div class="columns six">
           <div>
             <div>Ваш мобильный телефон</div>
-            <masked-input id="tr_mobile_phone" v-model="user.mobile_phone"
+            <masked-input id="mobile_phone"
+                          v-model="user.mobile_phone"
+                          @blur="$v.user.mobile_phone.$touch"
                           :mask="['8','(', /[9]/, /\d/, /\d/, ')',/\d/, /\d/, /\d/, '-', /\d/, /\d/,  '-', /\d/, /\d/]"
                           placeholder="8(___) ___-__-__"></masked-input>
-            <p></p>
+            <p v-if="errors.phoneNumber" class="red">Проверьте корректность ввода номера</p>
+            <span class="red" v-if="!$v.user.mobile_phone.required&&$v.user.mobile_phone.$error">Обязательное поле</span>
           </div>
         </div>
       </div>
@@ -18,10 +21,12 @@
         <div class="columns six">
           <div>
             <div>Фамилия</div>
-            <input name="tr_last_name" id="tr_last_name"
+            <input name="last_name" id="last_name"
                    v-model="user.last_name"
+                   @blur="$v.user.last_name.$touch"
             />
-            <p style=""></p>
+            <p v-if="errors.last_name" class="red">Проверьте корректность ввода фамилии</p>
+            <span class="red" v-if="!$v.user.last_name.required&&$v.user.last_name.$error">Обязательное поле</span>
           </div>
         </div>
       </div>
@@ -30,9 +35,13 @@
         <div class="columns six">
           <div>
             <div>Имя</div>
-            <input name="tr_first_name" id="tr_first_name" placeholder="" value="" v-model="user.first_name"
+            <input name="first_name" id="first_name"
+                   v-model="user.first_name"
+                   @blur="$v.user.first_name.$touch"
             >
-            <p style=""></p>
+            <p v-if="errors.first_name" class="red">Проверьте корректность ввода имени</p>
+            <span class="red" v-if="!$v.user.first_name.required&&$v.user.first_name.$error">Обязательное поле</span>
+
           </div>
         </div>
       </div>
@@ -41,10 +50,12 @@
         <div class="columns six">
           <div>
             <div>Отчество</div>
-            <input name="tr_middle_name" id="tr_middle_name" placeholder="" value=""
+            <input name="middle_name" id="middle_name" placeholder="" value=""
                    v-model="user.middle_name"
+                   @blur="$v.user.middle_name.$touch"
             >
-            <p style=""></p>
+            <p v-if="errors.middle_name" class="red">Проверьте корректность ввода отчества</p>
+            <span class="red" v-if="!$v.user.middle_name.required&&$v.user.middle_name.$error">Обязательное поле</span>
           </div>
         </div>
       </div>
@@ -52,9 +63,12 @@
         <div class="columns three"></div>
         <div class="columns six">
           <div>Электронная почта</div>
-          <input name="tr_email" id="tr_email" placeholder="" value="" autocomplete="off"
-                 v-model="user.email">
-          <p></p>
+          <input name="email" id="email" autocomplete="off"
+                 v-model.trim="user.email"
+                 @blur="$v.user.email.$touch"
+          >
+          <span class="red" v-if="!$v.user.email.required&&$v.user.email.$error">Обязательное поле</span>
+          <span class="red" v-if="!$v.user.email.email">Убедитесь в корректности ввода email</span>
         </div>
       </div>
       <div class="row marg-b-10" id="buttonStepBlock" v-if="!codeRequested">
@@ -64,7 +78,6 @@
       </div>
     </form>
     <div v-if="codeRequested">
-
       <div class="row">
         <div class="column h-block"><h3>Подтверждение номера телефона</h3></div>
       </div>
@@ -101,7 +114,7 @@
       <div class="row marg-b-10">
         <div class="column center">
           <button class="green button-img check-mark" :disabled="!(agree && verificationCode.length >= 4)"
-                  @click="verifySms">
+                  @submit="verifySms">
             Продолжить
           </button>
         </div>
@@ -112,6 +125,7 @@
 
 <script>
   import MaskedInput from 'vue-text-mask'
+  import { required, email } from 'vuelidate/lib/validators'
 
   export default {
     components: {MaskedInput},
@@ -122,10 +136,49 @@
         codeRequested: false,
         agree: false,
         verificationCode: '',
-        smsType: ''
+        smsType: '',
+        errors: {
+        }
+      }
+    },
+    validations: {
+      user: {
+        email: {
+          required,
+          email
+        },
+        last_name: {
+          required
+        },
+        first_name: {
+          required
+        },
+        middle_name: {
+          required
+        },
+        mobile_phone: {
+          required
+        }
       }
     },
     methods: {
+      requestVerificationCode: function () {
+        const requestData = {
+          phoneNumber: this.user.mobile_phone
+        }
+        this.$emit('requestVerificationCode')
+        this.$http.post(`phoneVerification/send`, JSON.stringify(requestData))
+          .then(response => {
+            this.$store.commit('setUserValues', this.user)
+            this.hash = response.body.hash
+            this.smsType = response.body.mode
+            this.codeRequested = true
+          })
+          .catch((error) => {
+            this.errors = {...this.errors, ...error.body.errors.detail}
+            console.log((this.errors.phoneNumber))
+          })
+      },
       verifySms: function () {
         const postData = {
           phoneNumber: this.user.mobile_phone,
@@ -143,22 +196,9 @@
               console.log('здесь делаем логику если пользователь вернулся за кредитным рейтингом')
             }
             this.$store.commit('setAuthorized')
-            this.$router.push('questionnaire')
+            this.$router.push('Questionnaire')
           })
           .catch(err => console.log(err))
-      },
-      getVerificationSms: function () {
-        const requestData = {
-          phoneNumber: this.user.mobile_phone
-        }
-        this.$http.post(`phoneVerification/send`, JSON.stringify(requestData))
-          .then(response => {
-            this.$store.commit('setUserValues', this.user)
-            this.hash = response.body.hash
-            this.smsType = response.body.mode
-            this.codeRequested = true
-          })
-          .catch((error) => console.log(error))
       }
     }
   }
