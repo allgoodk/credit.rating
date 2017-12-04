@@ -19,7 +19,10 @@ const router = new Router({
     {
       path: '/questionnaire',
       name: 'Questionnaire',
-      component: Questionnaire
+      component: Questionnaire,
+      meta: {
+        auth: true
+      }
     }
   ],
   redirect: {
@@ -31,7 +34,7 @@ const router = new Router({
 router.beforeEach((to, from, next) => {
   const authRequired = to.matched.some((route) => route.meta.auth)
   if (authRequired) {
-    if (store.getAuthorized) {
+    if (store.getters.getAuthorized) {
       next()
     } else {
       router.push('/')

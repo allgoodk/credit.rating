@@ -6,24 +6,8 @@ Vue.use(Vuex)
 export const store = new Vuex.Store({
   state: {
     user: {
-      city: '',
-      last_name: '',
-      first_name: '',
-      middle_name: '',
-      male: '',
-      p_number: '',
-      p_serie: '',
-      p_from: '',
-      p_code: '',
-      p_date: '',
-      obr: '',
-      profit_month: '',
-      from_where: '',
-      mobile_phone: '',
-      work_sphere: '',
-      work_vid: ''
     },
-    authorized: false,
+    authorized: true,
     token: ''
   },
   mutations: {
@@ -55,6 +39,9 @@ export const store = new Vuex.Store({
     },
     getAuthorized: state => {
       return state.authorized
+    },
+    getUser: state => {
+      return state.user
     }
   }
 })

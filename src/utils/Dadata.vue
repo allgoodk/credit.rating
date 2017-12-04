@@ -60,8 +60,7 @@
                   @keydown.enter.prevent="selectHouse"
                   type="text"
                   class="big form-control"
-                  style=" box-sizing: border-box
-                         ;"
+                  style=" box-sizing: border-box;"
                 >
                           <p class="hidden" style=""></p>
          <ul v-show="isOpenHouse" class="options-list">

@@ -8,16 +8,15 @@ import VueResource from 'vue-resource'
 import lodash from 'lodash'
 import VueLodash from 'vue-lodash'
 import auth from './auth/index'
+import config from './config/index'
+import { store } from './store/store.js'
+import Auth from './auth/index.js'
 
 // import css
 import 'normalize.css'
 
 require('../static/css/custom.css')
 require('../static/css/skeleton.css')
-
-// import store
-import { store } from './store/store.js'
-import Auth from './auth/index.js'
 
 Vue.config.productionTip = false
 Vue.use(Vuex)
@@ -28,9 +27,7 @@ Vue.use(VueLodash, lodash)
 Auth.checkAuth()
 
 // set API URL for vue-resource
-/*
-Vue.http.options.root = 'http://webbankir.zend'
-*/
+Vue.http.options.root = config.API
 
 // eslint-disable-next-line
 new Vue({
