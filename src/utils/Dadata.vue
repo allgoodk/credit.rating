@@ -208,7 +208,7 @@
             address.city2 = address.city2_guid = address.city2_value = ''
           }
         } catch (e) {
-          return
+          return false
         }
       },
       address: {
@@ -237,21 +237,21 @@
         this.$http.post(this.url, JSON.stringify(data)).then((response) => {
           response = JSON.parse(JSON.stringify(response))
           this.suggestions = response.body.suggestions
-        })
+        }).catch(err => console.log(err))
       },
       moveDown () {
         if (!this.isOpen && !this.isOpenHouse) {
-          return
+          return false
         }
         this.selectedItem = (this.selectedItem + 1) % this.suggestions.length
-        this.suggestions.length > 1 ? this.keyword = (this.suggestions[this.selectedItem].value) : null
+        this.keyword = this.suggestions.length > 1 ? (this.suggestions[this.selectedItem].value) : null
       },
       moveUp () {
         if (!this.isOpen && !this.isOpenHouse) {
           return
         }
         this.selectedItem = this.selectedItem - 1 < 0 ? this.suggestions.length - 1 : this.selectedItem - 1
-        this.suggestions.length > 1 ? this.keyword = (this.suggestions[this.selectedItem].value) : null
+        this.keyword = this.suggestions.length > 1 ? (this.suggestions[this.selectedItem].value) : null
       },
       select () {
         this.isOpen = false
@@ -291,28 +291,29 @@
           },
           restrict_value: true
         }
-        this.$http.post(this.url, JSON.stringify(data)).then((response) => {
-          this.houseSuggestions = []
-          response = JSON.parse(JSON.stringify(response))
-          this.suggestions = response.body.suggestions
-          this.suggestions.forEach((item) => {
-            this.houseSuggestions.push(item.data.house)
-          })
-        })
+        this.$http.post(this.url, JSON.stringify(data))
+          .then((response) => {
+            this.houseSuggestions = []
+            response = JSON.parse(JSON.stringify(response))
+            this.suggestions = response.body.suggestions
+            this.suggestions.forEach((item) => {
+              this.houseSuggestions.push(item.data.house)
+            })
+          }).catch(err => console.log(err))
       },
       moveDownHouse () {
         if (!this.isOpen && !this.isOpenHouse) {
           return
         }
         this.selectedItem = (this.selectedItem + 1) % this.suggestions.length
-        this.suggestions.length > 1 && this.suggestions[this.selectedItem].data.house !== undefined ? this.address.house = (this.suggestions[this.selectedItem].data.house) : null
+        this.address.house = this.suggestions.length > 1 && this.suggestions[this.selectedItem].data.house !== undefined ? (this.suggestions[this.selectedItem].data.house) : null
       },
       moveUpHouse () {
         if (!this.isOpen && !this.isOpenHouse) {
           return
         }
         this.selectedItem = this.selectedItem - 1 < 0 ? this.suggestions.length - 1 : this.selectedItem - 1
-        this.suggestions.length > 1 ? this.address.house = (this.suggestions[this.selectedItem].data.house) : null
+        this.address.house = this.suggestions.length > 1 ? (this.suggestions[this.selectedItem].data.house) : null
       },
       suggest: async function (query) {
         this.$http.post(this.url, JSON.stringify(query)).then((response) => {
@@ -321,11 +322,7 @@
           if (this.currentChoice !== undefined) {
             this.keyword = this.currentChoice.value
           }
-        })
-      },
-      getPreparedField (str, reg) {
-        const res = str.split(', ').filter(element => !element.search(reg)).join('').replace(reg, '')
-        return res
+        }).catch(err => console.log(err))
       }
     },
     mounted: function () {

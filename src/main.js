@@ -10,7 +10,6 @@ import VueLodash from 'vue-lodash'
 import auth from './auth/index'
 import config from './config/index'
 import { store } from './store/store.js'
-import Auth from './auth/index.js'
 import Vuelidate from 'vuelidate'
 
 // import css
@@ -18,7 +17,6 @@ import 'normalize.css'
 
 require('../static/css/custom.css')
 require('../static/css/skeleton.css')
-debugger
 Vue.config.productionTip = false
 // Use statments for 3-rd party libs
 Vue.use(Vuex)
@@ -27,7 +25,7 @@ Vue.use(VueLodash, lodash)
 Vue.use(Vuelidate)
 
 // Check auth status when refreshing page or reopen tab
-Auth.checkAuth()
+auth.checkAuth()
 
 // set API URL for vue-resource
 Vue.http.options.root = config.API
@@ -55,4 +53,3 @@ Vue.http.interceptors.push((request, next) => {
   next()
 })
 */
-
